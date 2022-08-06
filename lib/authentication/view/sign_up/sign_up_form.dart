@@ -4,6 +4,7 @@ import 'package:weather_app/authentication/bloc/sign_up_cubit.dart';
 import 'package:weather_app/authentication/widgets/button_widget.dart';
 import 'package:weather_app/authentication/widgets/text_field.dart';
 import 'package:weather_app/utils/app_images.dart';
+import 'package:weather_app/utils/side_animation.dart';
 import 'package:weather_app/utils/snackbar.dart';
 import 'package:weather_app/utils/validations.dart';
 import 'package:weather_app/weather/view/weather_page.dart';
@@ -24,21 +25,30 @@ class SignUpForm extends StatelessWidget {
               key: signupBloc.formKey,
               child: Column(
                 children: [
-                  Image.asset(AppImages.appLogoImg),
-                  InputWidget(
-                    controller: signupBloc.nameController,
-                    hintText: 'name',
-                    validator: Validation().nameValidator,
+                  SideInAnimation(1, child: Image.asset(AppImages.appLogoImg)),
+                  SideInAnimation(
+                    2,
+                    child: InputWidget(
+                      controller: signupBloc.nameController,
+                      hintText: 'name',
+                      validator: Validation().nameValidator,
+                    ),
                   ),
-                  InputWidget(
-                    controller: signupBloc.emailController,
-                    hintText: 'email address',
-                    validator: Validation().emailValidator,
+                  SideInAnimation(
+                    3,
+                    child: InputWidget(
+                      controller: signupBloc.emailController,
+                      hintText: 'email address',
+                      validator: Validation().emailValidator,
+                    ),
                   ),
-                  InputWidget(
-                    controller: signupBloc.passwordController,
-                    hintText: 'password',
-                    validator: Validation().passwordValidator,
+                  SideInAnimation(
+                    4,
+                    child: InputWidget(
+                      controller: signupBloc.passwordController,
+                      hintText: 'password',
+                      validator: Validation().passwordValidator,
+                    ),
                   ),
                   BlocConsumer<SignUpCubit, SignUpState>(
                     listener: (context, state) {
@@ -53,14 +63,17 @@ class SignUpForm extends StatelessWidget {
                       }
                     },
                     builder: (context, state) {
-                      return ButtonWidget(
-                        isLoading: state is SignUpLoading ? true : false,
-                        onPressed: () {
-                          if (signupBloc.formKey.currentState!.validate()) {
-                            context.read<SignUpCubit>().signUpWithEmail();
-                          }
-                        },
-                        title: 'Sign up',
+                      return SideInAnimation(
+                        5,
+                        child: ButtonWidget(
+                          isLoading: state is SignUpLoading ? true : false,
+                          onPressed: () {
+                            if (signupBloc.formKey.currentState!.validate()) {
+                              context.read<SignUpCubit>().signUpWithEmail();
+                            }
+                          },
+                          title: 'Sign up',
+                        ),
                       );
                     },
                   ),

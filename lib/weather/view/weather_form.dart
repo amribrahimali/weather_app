@@ -53,28 +53,27 @@ class WeatherForm extends StatelessWidget {
           return const WeatherShimmer();
         }
         if (state is GetWeatherByCitySuccess) {
-          return const WeatherShimmer();
-          // return Stack(
-          //   children: [
-          //     const BackgroundImg(),
-          //     SingleChildScrollView(
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           WeatherPanel(weatherData: state.weather),
-          //           OtherDetailPage(weatherData: state.weather),
-          //           Padding(
-          //             padding: const EdgeInsets.all(20),
-          //             child: Text("Next 7 Days",
-          //                 style: GoogleFonts.rubik(
-          //                     fontSize: 18, color: AppColors.primaryColor)),
-          //           ),
-          //           NextDaysPanel(weatherData: state.weather)
-          //         ],
-          //       ),
-          //     )
-          //   ],
-          // );
+          return Stack(
+            children: [
+              const BackgroundImg(),
+              SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    WeatherPanel(weatherData: state.weather),
+                    OtherDetailPage(weatherData: state.weather),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text("Next 7 Days",
+                          style: GoogleFonts.rubik(
+                              fontSize: 18, color: AppColors.primaryColor)),
+                    ),
+                    NextDaysPanel(weatherData: state.weather)
+                  ],
+                ),
+              )
+            ],
+          );
         }
         if (state is GetWeatherByCityFailure) {
           return const SearchErrorWidget();

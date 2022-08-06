@@ -4,6 +4,7 @@ import 'package:weather_app/authentication/bloc/login_cubit.dart';
 import 'package:weather_app/authentication/widgets/button_widget.dart';
 import 'package:weather_app/authentication/widgets/text_field.dart';
 import 'package:weather_app/utils/app_images.dart';
+import 'package:weather_app/utils/side_animation.dart';
 import 'package:weather_app/utils/snackbar.dart';
 import 'package:weather_app/utils/validations.dart';
 import 'package:weather_app/weather/view/weather_page.dart';
@@ -24,16 +25,22 @@ class LoginForm extends StatelessWidget {
               key: loginBloc.formKey,
               child: Column(
                 children: [
-                  Image.asset(AppImages.appLogoImg),
-                  InputWidget(
-                    controller: loginBloc.emailController,
-                    hintText: 'email address',
-                    validator: Validation().emailValidator,
+                  SideInAnimation(1, child: Image.asset(AppImages.appLogoImg)),
+                  SideInAnimation(
+                    2,
+                    child: InputWidget(
+                      controller: loginBloc.emailController,
+                      hintText: 'email address',
+                      validator: Validation().emailValidator,
+                    ),
                   ),
-                  InputWidget(
-                    controller: loginBloc.passwordController,
-                    hintText: 'password',
-                    validator: Validation().passwordValidator,
+                  SideInAnimation(
+                    3,
+                    child: InputWidget(
+                      controller: loginBloc.passwordController,
+                      hintText: 'password',
+                      validator: Validation().passwordValidator,
+                    ),
                   ),
                   BlocConsumer<LoginCubit, LoginState>(
                     listener: (context, state) {
@@ -48,14 +55,17 @@ class LoginForm extends StatelessWidget {
                       }
                     },
                     builder: (context, state) {
-                      return ButtonWidget(
-                        isLoading: state is LoginLoading ? true : false,
-                        onPressed: () {
-                          if (loginBloc.formKey.currentState!.validate()) {
-                            context.read<LoginCubit>().loginWithEmail();
-                          }
-                        },
-                        title: 'Login',
+                      return SideInAnimation(
+                        4,
+                        child: ButtonWidget(
+                          isLoading: state is LoginLoading ? true : false,
+                          onPressed: () {
+                            if (loginBloc.formKey.currentState!.validate()) {
+                              context.read<LoginCubit>().loginWithEmail();
+                            }
+                          },
+                          title: 'Login',
+                        ),
                       );
                     },
                   ),

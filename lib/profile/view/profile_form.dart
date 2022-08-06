@@ -7,6 +7,7 @@ import 'package:weather_app/authentication/widgets/text_field.dart';
 import 'package:weather_app/profile/bloc/update_user_data_cubit.dart';
 import 'package:weather_app/profile/widgets/logout_section.dart';
 import 'package:weather_app/utils/app_colors.dart';
+import 'package:weather_app/utils/side_animation.dart';
 import 'package:weather_app/utils/snackbar.dart';
 import 'package:weather_app/utils/validations.dart';
 import 'package:weather_app/weather/widgets/background_img.dart';
@@ -35,19 +36,28 @@ class ProfileForm extends StatelessWidget {
               child: Column(
                 children: [
                   const LogoutSection(),
-                  InputWidget(
-                    controller: updateDataBloc.nameController,
-                    hintText: 'name',
-                    validator: Validation().nameValidator,
+                  SideInAnimation(
+                    2,
+                    child: InputWidget(
+                      controller: updateDataBloc.nameController,
+                      hintText: 'name',
+                      validator: Validation().nameValidator,
+                    ),
                   ),
-                  InputWidget(
-                    controller: updateDataBloc.emailController,
-                    hintText: 'email address',
-                    validator: Validation().emailValidator,
+                  SideInAnimation(
+                    3,
+                    child: InputWidget(
+                      controller: updateDataBloc.emailController,
+                      hintText: 'email address',
+                      validator: Validation().emailValidator,
+                    ),
                   ),
-                  InputWidget(
-                    controller: updateDataBloc.passwordController,
-                    hintText: 'password',
+                  SideInAnimation(
+                    4,
+                    child: InputWidget(
+                      controller: updateDataBloc.passwordController,
+                      hintText: 'password',
+                    ),
                   ),
                   BlocConsumer<UpdateUserDataCubit, UpdateUserDataState>(
                     listener: (context, state) {
@@ -59,17 +69,21 @@ class ProfileForm extends StatelessWidget {
                       }
                     },
                     builder: (context, state) {
-                      return ButtonWidget(
-                        isLoading:
-                            state is UpdateUserDataLoading ? true : false,
-                        onPressed: () {
-                          if (updateDataBloc.formKey.currentState!.validate()) {
-                            context
-                                .read<UpdateUserDataCubit>()
-                                .updateUserData();
-                          }
-                        },
-                        title: 'Update',
+                      return SideInAnimation(
+                        5,
+                        child: ButtonWidget(
+                          isLoading:
+                              state is UpdateUserDataLoading ? true : false,
+                          onPressed: () {
+                            if (updateDataBloc.formKey.currentState!
+                                .validate()) {
+                              context
+                                  .read<UpdateUserDataCubit>()
+                                  .updateUserData();
+                            }
+                          },
+                          title: 'Update',
+                        ),
                       );
                     },
                   ),
