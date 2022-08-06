@@ -8,12 +8,24 @@ class SearchErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Text(
-      "ERROR",
-      style: GoogleFonts.rubik(
-          fontSize: 50,
-          fontWeight: FontWeight.bold,
-          color: AppColors.selectedColor),
-    ));
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.refresh, color: AppColors.primaryColor, size: 40),
+          Padding(
+            padding: const EdgeInsets.all(30),
+            child: Text(
+              "Not Found Weather Data for this Location.\n please, try again.",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.rubik(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.selectedColor),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
