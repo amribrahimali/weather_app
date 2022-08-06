@@ -50,6 +50,7 @@ class ProfileForm extends StatelessWidget {
                       controller: updateDataBloc.emailController,
                       hintText: 'email address',
                       validator: Validation().emailValidator,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   SideInAnimation(
@@ -57,6 +58,7 @@ class ProfileForm extends StatelessWidget {
                     child: InputWidget(
                       controller: updateDataBloc.passwordController,
                       hintText: 'password',
+                      keyboardType: TextInputType.visiblePassword,
                     ),
                   ),
                   BlocConsumer<UpdateUserDataCubit, UpdateUserDataState>(

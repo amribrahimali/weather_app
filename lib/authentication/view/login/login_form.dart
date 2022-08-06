@@ -32,6 +32,7 @@ class LoginForm extends StatelessWidget {
                       controller: loginBloc.emailController,
                       hintText: 'email address',
                       validator: Validation().emailValidator,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   SideInAnimation(
@@ -40,6 +41,7 @@ class LoginForm extends StatelessWidget {
                       controller: loginBloc.passwordController,
                       hintText: 'password',
                       validator: Validation().passwordValidator,
+                      keyboardType: TextInputType.visiblePassword,
                     ),
                   ),
                   BlocConsumer<LoginCubit, LoginState>(
