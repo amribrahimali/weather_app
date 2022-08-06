@@ -12,6 +12,7 @@ import 'package:weather_app/weather/widgets/next_day_panel.dart';
 import 'package:weather_app/weather/widgets/others_details.dart';
 import 'package:weather_app/weather/widgets/search_panel.dart';
 import 'package:weather_app/weather/widgets/weather_panel.dart';
+import 'package:weather_app/weather/widgets/weather_shimmer.dart';
 
 class WeatherForm extends StatelessWidget {
   const WeatherForm({Key? key}) : super(key: key);
@@ -49,35 +50,36 @@ class WeatherForm extends StatelessWidget {
       body: BlocBuilder<GetWeatherByCityCubit, GetWeatherByCityState>(
           builder: (context, state) {
         if (state is GetWeatherByCityLoading) {
-          return const Center(child: CircularProgressIndicator.adaptive());
+          return const WeatherShimmer();
         }
         if (state is GetWeatherByCitySuccess) {
-          return Stack(
-            children: [
-              const BackgroundImg(),
-              SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WeatherPanel(weatherData: state.weather),
-                    OtherDetailPage(weatherData: state.weather),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Text("Next 7 Days",
-                          style: GoogleFonts.rubik(
-                              fontSize: 18, color: AppColors.primaryColor)),
-                    ),
-                    NextDaysPanel(weatherData: state.weather)
-                  ],
-                ),
-              )
-            ],
-          );
+          return const WeatherShimmer();
+          // return Stack(
+          //   children: [
+          //     const BackgroundImg(),
+          //     SingleChildScrollView(
+          //       child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           WeatherPanel(weatherData: state.weather),
+          //           OtherDetailPage(weatherData: state.weather),
+          //           Padding(
+          //             padding: const EdgeInsets.all(20),
+          //             child: Text("Next 7 Days",
+          //                 style: GoogleFonts.rubik(
+          //                     fontSize: 18, color: AppColors.primaryColor)),
+          //           ),
+          //           NextDaysPanel(weatherData: state.weather)
+          //         ],
+          //       ),
+          //     )
+          //   ],
+          // );
         }
         if (state is GetWeatherByCityFailure) {
           return const SearchErrorWidget();
         }
-        return const SizedBox();
+        return const WeatherShimmer();
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () =>

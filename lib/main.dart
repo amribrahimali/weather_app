@@ -17,7 +17,6 @@ Future<void> main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(
-        name: 'weather-app',
         options: DefaultFirebaseOptions.currentPlatform,
       );
       BlocOverrides.runZoned(

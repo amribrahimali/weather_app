@@ -15,8 +15,12 @@ class SearchPanel extends StatelessWidget {
         borderRadius: BorderRadius.circular(32),
       ),
       child: TextField(
-        onSubmitted: (value) =>
-            context.read<SwitchSearchCubit>().switchSearch(false),
+        onSubmitted: (value) {
+          context
+              .read<GetWeatherByCityCubit>()
+              .getWeather(city: cityBloc.cityController.text);
+          context.read<SwitchSearchCubit>().switchSearch(false);
+        },
         controller: cityBloc.cityController,
         style: GoogleFonts.rubik(fontSize: 15, color: Colors.white),
         decoration: InputDecoration(
